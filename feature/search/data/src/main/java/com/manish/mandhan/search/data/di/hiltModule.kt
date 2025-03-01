@@ -15,19 +15,19 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object hiltModule {
-    private const val BASE_URL = "https://www.themealdb.com/"
-
-    @Provides
-    fun provideRetrofitInstance(): Retrofit {
-        return Retrofit.Builder().baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
-
-    @Provides
-    fun providesRecipeApi(retrofit: Retrofit): SearchRecipeApi {
-        return retrofit.create(SearchRecipeApi::class.java)
-    }
+//    private const val BASE_URL = "https://www.themealdb.com/"
+//
+//    @Provides
+//    fun provideRetrofitInstance(): Retrofit {
+//        return Retrofit.Builder().baseUrl(BASE_URL)
+//            .addConverterFactory(GsonConverterFactory.create())
+//            .build()
+//    }
+//
+//    @Provides
+//    fun providesRecipeApi(retrofit: Retrofit): SearchRecipeApi {
+//        return retrofit.create(SearchRecipeApi::class.java)
+//    }
 
 //    @Provides
 //    @Singleton

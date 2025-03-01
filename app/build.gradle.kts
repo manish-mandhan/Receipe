@@ -56,6 +56,8 @@ android {
 
 dependencies {
     implementation(project(":feature:search:presentation"))
+    implementation(project(":feature:search:domain"))
+    implementation(project(":feature:search:data"))
     implementation(project(":common"))
 
     implementation(libs.androidx.core.ktx)
@@ -81,5 +83,9 @@ dependencies {
 
 
     implementation(libs.androidx.navigation.compose)
+
+
+    implementation(libs.converter.gson)
+    implementation(libs.squareup.retrofit2)
 
 }

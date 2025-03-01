@@ -24,9 +24,9 @@ class SearchFeatureApiImpl : SearchFeatureApi {
             composable(route = Navigation.SearchFeature.RecipeList.route) {
 
             }
-            composable(route = Navigation.SearchFeature.RecipeDetails.route) {
-
-            }
+//            composable(route = Navigation.SearchFeature.RecipeDetails.sendId("33982")) {
+//
+//            }
         }
 
     }
