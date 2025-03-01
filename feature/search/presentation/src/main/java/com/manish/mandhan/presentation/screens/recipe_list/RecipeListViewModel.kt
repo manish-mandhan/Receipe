@@ -18,11 +18,14 @@ import javax.inject.Inject
 class RecipeListViewModel @Inject constructor(
     private val getAllRecipesUseCase: GetAllRecipesUseCase
 ) : ViewModel() {
-
     private var currentJob: Job? = null
 
     private val _uiState = MutableStateFlow(RecipeList.UiState())
     val uiState = _uiState.asStateFlow()
+
+    init {
+        _uiState.value = RecipeList.UiState(text = UiText.RemoteString("Search Anything"))
+    }
 
     private fun search(s: String) {
         currentJob?.cancel()
@@ -30,7 +33,7 @@ class RecipeListViewModel @Inject constructor(
         currentJob = getAllRecipesUseCase(s).onEach {
             when (it) {
                 NetworkResult.Loading -> {
-                    _uiState.value = RecipeList.UiState(isLoading = true)
+                    _uiState.value = RecipeList.UiState(isLoading = true, text = UiText.Idle)
                 }
 
                 is NetworkResult.Error -> {

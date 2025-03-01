@@ -1,11 +1,7 @@
 package com.manish.mandhan.search.data.mappers
 
-import android.util.Log
 import com.manish.mandhan.search.data.model.RecipeDTO
-import com.manish.mandhan.search.data.model.RecipeResponseModel
-import com.manish.mandhan.search.domain.model.DetailedDomainRecipeModel
 import com.manish.mandhan.search.domain.model.DomainRecipeModel
-import kotlin.math.log
 
 fun List<RecipeDTO>.toDomainModel(): List<DomainRecipeModel> {
     val list = mutableListOf<DomainRecipeModel>()
@@ -22,8 +18,10 @@ fun List<RecipeDTO>.toDomainModel(): List<DomainRecipeModel> {
                 strMeal = data.strMeal ?: "",
                 strMealThumb = data.strMealThumb ?: "",
                 strSource = data.strSource ?: "",
-                strTags = data.strTags,
+                strTags = data.strTags ?: "",
                 strInstruction = data.strInstructions ?: "",
+                strIngredients = data.getIngredientsPair(),
+                strYoutube = data.strYoutube ?: ""
             )
         )
 
@@ -32,20 +30,6 @@ fun List<RecipeDTO>.toDomainModel(): List<DomainRecipeModel> {
     return list.toList()
 }
 
-fun RecipeDTO.toDetailedDomainModel(): DetailedDomainRecipeModel {
-    return DetailedDomainRecipeModel(
-        dateModified = this.dateModified ?: "",
-        idMeal = this.idMeal ?: "",
-        strArea = this.strArea ?: "",
-        strCategory = this.strCategory ?: "",
-        strImageSource = this.strImageSource ?: "",
-        strSource = this.strSource ?: "",
-        strTags = this.strTags,
-        strInstruction = this.strInstructions ?: "",
-        strYoutube = this.strYoutube,
-        strIngredients = this.getIngredientsPair()
-    )
-}
 
 private fun RecipeDTO.getIngredientsPair(): List<Pair<String, String>> {
     val ingredients = listOf(

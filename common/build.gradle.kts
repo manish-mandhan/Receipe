@@ -4,6 +4,10 @@ plugins {
 
     alias(libs.plugins.compose.compiler)
 
+    kotlin("plugin.serialization")
+
+    id("com.google.dagger.hilt.android")
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -74,6 +78,8 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
 
 
+    implementation(libs.google.dragger.hilt)
+    ksp(libs.google.dragger.hilt.compiler)
 
     implementation(libs.kotlinx.serialization.json)
 

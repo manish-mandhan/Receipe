@@ -15,8 +15,6 @@ import retrofit2.http.Query
 interface SearchRecipeApi {
 
     @GET("api/json/v1/1/search.php")
-    suspend fun getProductByName(@Query("s") s: String) : RecipeResponseModel
+    suspend fun getProductByName(@Query("s") s: String): RecipeResponseModel
 
-    @GET("api/json/v1/1/lookup.php")
-    suspend fun getProductDetails(@Query("i") id: String) : RecipeDetailedResponseModel
 }

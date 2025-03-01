@@ -26,6 +26,9 @@ android {
     }
 
     buildTypes {
+        debug {
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -80,6 +83,11 @@ dependencies {
 
     implementation(libs.google.dragger.hilt)
     ksp(libs.google.dragger.hilt.compiler)
+
+    // coil
+    implementation(libs.coil)
+    implementation(libs.androidx.hilt.navigation.compose)
+
 
 
     implementation(libs.androidx.navigation.compose)
