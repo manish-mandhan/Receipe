@@ -66,7 +66,12 @@ fun MySearchBar(
                         .clip(CircleShape)
                         .height(60.dp),
                     value = textState.value,
-                    onValueChange = { textState.value = it },
+                    onValueChange = {
+                        textState.value = it
+                        onSearch(textState.value)
+
+
+                    },
                     leadingIcon = {
                         IconButton(
                             onClick = {

@@ -43,6 +43,11 @@ dependencies {
     implementation(project(":feature:search:domain"))
     implementation(project(":common"))
 
+    //room support
+    implementation(libs.androidx.room.runtime)
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.ktx)
+
 
 
     implementation(libs.google.dragger.hilt)

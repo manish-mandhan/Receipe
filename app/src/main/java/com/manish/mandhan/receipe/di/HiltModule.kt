@@ -1,5 +1,11 @@
 package com.manish.mandhan.receipe.di
 
+import android.app.Application
+import androidx.room.Room
+import androidx.room.RoomDatabase
+import com.manish.mandhan.receipe.App
+import com.manish.mandhan.search.data.local.RecipeDao
+import com.manish.mandhan.search.data.local.RecipeRoomDatabase
 import com.manish.mandhan.search.data.remote.SearchRecipeApi
 import com.manish.mandhan.search.data.repository.SearchRecipeRepositoryImpl
 import com.manish.mandhan.search.domain.repository.SearchRecipeRepository
@@ -19,6 +25,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object HiltModule {
 
+    private const val RECIPE_ROOM_DATA_BASE_NAME = "recipe_room_database"
     private const val BASE_URL = "https://www.themealdb.com/"
 
     @Provides
@@ -44,9 +51,30 @@ object HiltModule {
         return retrofit.create(SearchRecipeApi::class.java)
     }
 
+
+    @Singleton
+    @Provides
+    fun providesRoomInstance(app: Application): RecipeRoomDatabase {
+        return Room.databaseBuilder(
+            app,
+            RecipeRoomDatabase::class.java,
+            name = "recipe_room_database"
+        ).fallbackToDestructiveMigration().build()
+    }
+
+    @Singleton
+    @Provides
+    fun providesRecipeDao(recipeRoomDatabase: RecipeRoomDatabase): RecipeDao {
+        return recipeRoomDatabase.recipeDao()
+    }
+
+
     @Provides
     @Singleton
-    fun providesRepoToSearchData(searchRecipeApi: SearchRecipeApi): SearchRecipeRepository {
-        return SearchRecipeRepositoryImpl(searchRecipeApi)
+    fun providesRepoToSearchData(
+        searchRecipeApi: SearchRecipeApi,
+        dao: RecipeDao
+    ): SearchRecipeRepository {
+        return SearchRecipeRepositoryImpl(searchRecipeApi, dao)
     }
 }

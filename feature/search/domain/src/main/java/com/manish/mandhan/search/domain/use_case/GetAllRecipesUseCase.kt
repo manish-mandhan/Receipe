@@ -14,18 +14,24 @@ import javax.inject.Inject
 class GetAllRecipesUseCase @Inject constructor(private val repository: SearchRecipeRepository) {
     operator fun invoke(name: String): Flow<NetworkResult> {
         return flow {
+            kotlinx.coroutines.delay(500)
             emit(NetworkResult.Loading)
 
-            when (val response = repository.getRecipeByName(name)) {
-                is Result.Error -> emit(
-                    NetworkResult.Error(
-                        response.message ?: "Unknown error occurred."
+            if (name.length >= 3) {
+
+
+                when (val response = repository.getRecipeByName(name)) {
+                    is Result.Error -> emit(
+                        NetworkResult.Error(
+                            response.message ?: "Unknown error occurred."
+                        )
                     )
-                )
-                is Result.Success -> {
-                    emit(NetworkResult.Success(response.data!!))
+
+                    is Result.Success -> {
+                        emit(NetworkResult.Success(response.data!!))
+                    }
                 }
-            }
+            } else emit(NetworkResult.Error("Please enter a valid name"))
 
         }.catch {
             if (it is UnknownHostException) {

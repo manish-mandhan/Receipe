@@ -28,6 +28,8 @@ class RecipeListViewModel @Inject constructor(
     }
 
     private fun search(s: String) {
+        _uiState.value = RecipeList.UiState(isLoading = true, text = UiText.Idle)
+
         currentJob?.cancel()
 
         currentJob = getAllRecipesUseCase(s).onEach {

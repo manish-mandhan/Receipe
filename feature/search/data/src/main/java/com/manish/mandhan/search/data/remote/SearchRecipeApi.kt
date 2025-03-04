@@ -1,6 +1,5 @@
 package com.manish.mandhan.search.data.remote
 
-import com.manish.mandhan.search.data.model.RecipeDetailedResponseModel
 import com.manish.mandhan.search.data.model.RecipeResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Query

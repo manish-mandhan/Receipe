@@ -1,9 +1,12 @@
 package com.manish.mandhan.presentation.screens.recipe_details
 
+import android.util.Log
+import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,7 +35,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.style.TextOverflow
@@ -41,29 +47,38 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import coil.compose.AsyncImage
+import coil.compose.rememberAsyncImagePainter
+import coil.request.ImageRequest
 import com.manish.mandhan.presentation.R
 import com.manish.mandhan.search.domain.model.DomainRecipeModel
 import kotlinx.coroutines.flow.StateFlow
 
-@OptIn(ExperimentalMaterial3Api::class)
+
+val TAG = "DEBUGGING LOG"
+
 @Composable
 fun RecipeDetailsScreen(domainRecipeModel: DomainRecipeModel?, onBackPress: () -> Unit) {
 
 
+    val imagePainter: Painter = rememberAsyncImagePainter(model = domainRecipeModel?.strMealThumb)
     Scaffold { _ ->
 
+        val screenHeight = LocalConfiguration.current.screenHeightDp
         Column(
             modifier = Modifier
                 .verticalScroll(state = rememberScrollState())
-                .navigationBarsPadding()
                 .fillMaxSize()
+                .navigationBarsPadding()
         ) {
             Box(
                 modifier = Modifier
+                    .fillMaxWidth()
+                    .height(0.4f.dp * screenHeight)
             ) {
                 IconButton(
                     modifier = Modifier
                         .safeDrawingPadding()
+                        .padding(bottom = 32.dp)
                         .zIndex(1f),
                     onClick = onBackPress
                 ) {
@@ -75,15 +90,29 @@ fun RecipeDetailsScreen(domainRecipeModel: DomainRecipeModel?, onBackPress: () -
                         contentDescription = null
                     )
                 }
+
                 AsyncImage(
+                    modifier = Modifier
+                        .matchParentSize(),
+                    onError = {
+                        Log.e(
+                            TAG,
+                            "RecipeDetailsScreen: Error : ${it.result.throwable.message}"
+                        )
+                    },
                     alpha = 0.65f,
                     colorFilter = ColorFilter.tint(
                         color = Color.Black,
                         blendMode = BlendMode.Screen
                     ),
-                    modifier = Modifier.fillMaxWidth(),
-                    model = domainRecipeModel?.strMealThumb,
-                    contentDescription = "", contentScale = ContentScale.FillWidth
+                    model = ImageRequest.Builder(LocalContext.current)
+                        .data(domainRecipeModel?.strMealThumb)  // Image URL
+                        .crossfade(true)                        // Enable smooth transition
+                        .placeholder(R.drawable.place_holder_image)    // Placeholder while loading
+                        .error(R.drawable.place_holder_image)                // Error image if loading fails
+                        .build(),
+                    contentDescription = "",
+                    contentScale = ContentScale.FillBounds,
                 )
 
 
@@ -96,6 +125,7 @@ fun RecipeDetailsScreen(domainRecipeModel: DomainRecipeModel?, onBackPress: () -
                     text = domainRecipeModel?.strMeal ?: "",
                     color = Color.White,
                     modifier = Modifier
+                        .padding(top = 90.dp)
                         .align(
                             Alignment.BottomStart
                         )
