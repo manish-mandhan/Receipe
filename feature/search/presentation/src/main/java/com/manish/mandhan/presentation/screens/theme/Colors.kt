@@ -12,3 +12,4 @@ val Pink40 = Color(0xFF7D5260)
 
 
 val onWhite = Color(0xFFF3F3F3)
+val onBlack = Color(0xFF1C1C1C) // Slightly lighter black for dark theme

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -74,7 +75,7 @@ fun RecipeItem(
             modifier = Modifier
                 .fillMaxWidth()
                 .matchParentSize()
-                .background(onWhite)
+                .background(MaterialTheme.colorScheme.primary)
         ) {
 
         }
@@ -84,7 +85,7 @@ fun RecipeItem(
                     IntOffset(offsetXAnim.value.roundToInt(), 0)
                 }
                 .fillMaxWidth()
-                .background(Color.White)
+                .background(MaterialTheme.colorScheme.onPrimary)
                 .clickable {
                     if (offsetX.value == 0f) {
 
@@ -136,6 +137,6 @@ fun RecipeItem(
     Spacer(
         modifier = Modifier
             .height(16.dp)
-            .background(onWhite)
+            .background(MaterialTheme.colorScheme.primary)
     )
 }

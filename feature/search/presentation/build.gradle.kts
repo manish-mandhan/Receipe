@@ -51,6 +51,8 @@ dependencies {
     implementation(libs.material)
     testImplementation(libs.junit)
     implementation(libs.androidx.runtime)
+    implementation(libs.androidx.ui.tooling.preview)
+
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

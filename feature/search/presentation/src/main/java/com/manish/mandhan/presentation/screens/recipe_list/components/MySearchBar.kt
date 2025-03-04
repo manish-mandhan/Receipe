@@ -12,6 +12,7 @@ import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
@@ -38,21 +39,25 @@ fun MySearchBar(
     }
     SearchBar(
         modifier = Modifier
-            .shadow(elevation = 4.dp)
-            .background(onWhite)
+            .shadow(
+                elevation = 4.dp,
+                ambientColor = MaterialTheme.colorScheme.secondary,
+                spotColor = MaterialTheme.colorScheme.secondary
+            )
+            .background(MaterialTheme.colorScheme.primary)
             .padding(bottom = 16.dp),
         inputField = {
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(onWhite),
+                    .background(MaterialTheme.colorScheme.primary),
                 contentAlignment = Alignment.Center
             ) {
 
                 TextField(
                     colors = TextFieldDefaults.colors(
-                        unfocusedContainerColor = Color(0xFDFAFAFA),
-                        focusedContainerColor = Color.White,
+                        unfocusedContainerColor = MaterialTheme.colorScheme.onPrimary,
+                        focusedContainerColor = MaterialTheme.colorScheme.onPrimary,
                         focusedIndicatorColor = Color.Transparent,
                         unfocusedIndicatorColor = Color.Transparent
                     ),

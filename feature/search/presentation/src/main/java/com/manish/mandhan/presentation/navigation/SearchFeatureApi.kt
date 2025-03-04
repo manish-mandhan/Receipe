@@ -64,7 +64,9 @@ class SearchFeatureApiImpl : SearchFeatureApi {
             }
             composable<Navigation.SearchFeature.RecipeDetails> {
 
-                RecipeDetailsScreen(sharedViewModel.domainRecipeModel)
+                RecipeDetailsScreen(sharedViewModel.domainRecipeModel) {
+                    navHostController.popBackStack()
+                }
             }
         }
 

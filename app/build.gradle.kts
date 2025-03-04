@@ -1,3 +1,5 @@
+import com.android.build.api.variant.BuildConfigField
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -26,9 +28,6 @@ android {
     }
 
     buildTypes {
-        debug {
-
-        }
         release {
             isMinifyEnabled = false
             proguardFiles(

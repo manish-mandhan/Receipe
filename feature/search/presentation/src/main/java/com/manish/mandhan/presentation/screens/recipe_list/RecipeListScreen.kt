@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.safeGesturesPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -38,7 +39,7 @@ const val TAG = "DEBUGGING LOG"
 @Composable
 fun RecipeListScreen(
     uiState: StateFlow<RecipeListViewModel.RecipeList.UiState>,
-    onItemClick: (data : DomainRecipeModel) -> Unit,
+    onItemClick: (data: DomainRecipeModel) -> Unit,
     onSearch: (s: String) -> Unit
 ) {
     val state = uiState.collectAsState()
@@ -48,7 +49,7 @@ fun RecipeListScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .background(onWhite)
+                .background(MaterialTheme.colorScheme.primary)
         ) {
             MySearchBar(onSearch = onSearch)
 
@@ -74,7 +75,7 @@ fun RecipeListScreen(
             LazyColumn(
                 contentPadding = PaddingValues(top = 16.dp),
                 modifier = Modifier
-                    .background(onWhite)
+                    .background(MaterialTheme.colorScheme.primary)
                     .fillMaxSize()
                     .navigationBarsPadding()
             ) {
