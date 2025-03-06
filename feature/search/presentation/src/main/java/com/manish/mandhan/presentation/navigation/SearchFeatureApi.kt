@@ -1,21 +1,16 @@
 package com.manish.mandhan.presentation.navigation
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 //import com.manish.mandhan.common.navigation.FeatureApi
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
-import androidx.navigation.toRoute
 import com.manish.mandhan.common.navigation.Navigation
 import com.manish.mandhan.presentation.screens.recipe_details.RecipeDetailsScreen
 import com.manish.mandhan.presentation.screens.recipe_list.RecipeListScreen
 import com.manish.mandhan.presentation.screens.recipe_list.RecipeListViewModel
 import com.manish.mandhan.presentation.screens.shared.SharedViewModel
-import javax.inject.Inject
 
 interface SearchFeatureApi // : NavigationApi
 {
@@ -35,12 +30,12 @@ class SearchFeatureApiImpl : SearchFeatureApi {
         sharedViewModel: SharedViewModel
     ) {
 
-        navGraphBuilder.navigation<Navigation.SearchFeature.Root>(
-            startDestination = Navigation.SearchFeature.RecipeList
+        navGraphBuilder.navigation<Navigation.BottomNavigation.SearchFeatureNavigation.Root>(
+            startDestination = Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList
         ) {
 
 
-            composable<Navigation.SearchFeature.RecipeList> {
+            composable<Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList> {
                 val recipeListViewModel: RecipeListViewModel = hiltViewModel()
 
                 RecipeListScreen(
@@ -49,7 +44,7 @@ class SearchFeatureApiImpl : SearchFeatureApi {
                         sharedViewModel.domainRecipeModel = domainRecipeModel
 
                         navHostController.navigate(
-                            Navigation.SearchFeature.RecipeDetails
+                            Navigation.BottomNavigation.SearchFeatureNavigation.RecipeDetails
                         )
                     },
                     onSearch = {
@@ -62,7 +57,7 @@ class SearchFeatureApiImpl : SearchFeatureApi {
                 )
 
             }
-            composable<Navigation.SearchFeature.RecipeDetails> {
+            composable<Navigation.BottomNavigation.SearchFeatureNavigation.RecipeDetails> {
 
                 RecipeDetailsScreen(sharedViewModel.domainRecipeModel) {
                     navHostController.popBackStack()
