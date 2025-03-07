@@ -6,6 +6,7 @@ plugins {
 
     alias(libs.plugins.compose.compiler)
 
+
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
 }
@@ -60,6 +61,9 @@ dependencies {
     implementation(project(":feature:search:presentation"))
     implementation(project(":feature:search:domain"))
     implementation(project(":feature:search:data"))
+    implementation(project(":feature:profile"))
+    implementation(project(":feature:settings"))
+
     implementation(project(":common"))
 
 

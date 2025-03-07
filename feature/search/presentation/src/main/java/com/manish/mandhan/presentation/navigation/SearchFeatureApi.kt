@@ -30,12 +30,12 @@ class SearchFeatureApiImpl : SearchFeatureApi {
         sharedViewModel: SharedViewModel
     ) {
 
-        navGraphBuilder.navigation<Navigation.BottomNavigation.SearchFeatureNavigation.Root>(
-            startDestination = Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList
+        navGraphBuilder.navigation<Navigation.BottomNavigation.SearchFeature.Root>(
+            startDestination = Navigation.BottomNavigation.SearchFeature.RecipeList
         ) {
 
 
-            composable<Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList> {
+            composable<Navigation.BottomNavigation.SearchFeature.RecipeList> {
                 val recipeListViewModel: RecipeListViewModel = hiltViewModel()
 
                 RecipeListScreen(
@@ -44,7 +44,7 @@ class SearchFeatureApiImpl : SearchFeatureApi {
                         sharedViewModel.domainRecipeModel = domainRecipeModel
 
                         navHostController.navigate(
-                            Navigation.BottomNavigation.SearchFeatureNavigation.RecipeDetails
+                            Navigation.BottomNavigation.SearchFeature.RecipeDetails
                         )
                     },
                     onSearch = {
@@ -57,7 +57,7 @@ class SearchFeatureApiImpl : SearchFeatureApi {
                 )
 
             }
-            composable<Navigation.BottomNavigation.SearchFeatureNavigation.RecipeDetails> {
+            composable<Navigation.BottomNavigation.SearchFeature.RecipeDetails> {
 
                 RecipeDetailsScreen(sharedViewModel.domainRecipeModel) {
                     navHostController.popBackStack()

@@ -8,31 +8,41 @@ sealed class Navigation {
 
 
     @Serializable
-    sealed class BottomNavigation(val route: String) : Navigation() {
+    sealed class BottomNavigation : Navigation() {
 
         @Serializable
-        sealed class SearchFeatureNavigation(private val string: String) : BottomNavigation(string) {
+        sealed class SearchFeature : BottomNavigation() {
 
             @Serializable
-            data object Root : SearchFeatureNavigation("search_feature_root")
+            data object Root : SearchFeature()
 
             @Serializable
-            data object RecipeList : SearchFeatureNavigation("search_feature_recipe_list")
+            data object RecipeList : SearchFeature()
 
             @Serializable
-            data object RecipeDetails : SearchFeatureNavigation("search_feature_recipe_details")
+            data object RecipeDetails : SearchFeature()
         }
 
 
         @Serializable
-        sealed class HomeNavigation(private val string: String) : BottomNavigation(string) {
-
-
-            @Serializable
-            data object Profile : HomeNavigation("home_profile")
+        sealed class ProfileFeature : BottomNavigation() {
 
             @Serializable
-            data object Settings : HomeNavigation("home_settings")
+            data object Root : ProfileFeature()
+
+            @Serializable
+            data object Profile : ProfileFeature()
+        }
+
+
+        @Serializable
+        sealed class SettingFeature : BottomNavigation() {
+
+            @Serializable
+            data object Root : SettingFeature()
+
+            @Serializable
+            data object Settings : SettingFeature()
         }
     }
 

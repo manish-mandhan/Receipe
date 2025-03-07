@@ -2,8 +2,10 @@ package com.manish.mandhan.receipe.di
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
-import com.manish.mandhan.receipe.App
+import com.manish.mandhan.feature.profile.navigation.ProfileFeatureNavigationApi
+import com.manish.mandhan.feature.profile.navigation.ProfileFeatureNavigationApiImpl
+import com.manish.mandhan.feature.settings.SettingsFeatureNavigationApi
+import com.manish.mandhan.presentation.navigation.SearchFeatureApi
 import com.manish.mandhan.search.data.local.RecipeDao
 import com.manish.mandhan.search.data.local.RecipeRoomDatabase
 import com.manish.mandhan.search.data.remote.SearchRecipeApi
@@ -12,9 +14,7 @@ import com.manish.mandhan.search.domain.repository.SearchRecipeRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.HiltAndroidApp
 import dagger.hilt.components.SingletonComponent
-import okhttp3.OkHttp
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -77,4 +77,25 @@ object HiltModule {
     ): SearchRecipeRepository {
         return SearchRecipeRepositoryImpl(searchRecipeApi, dao)
     }
+
+    @Provides
+    @Singleton
+    fun providesNavigationApiWrapper(
+        searchFeatureApi: SearchFeatureApi,
+        profileFeatureApi: ProfileFeatureNavigationApi,
+        settingsFeatureApi: SettingsFeatureNavigationApi
+    ): NavigationApiWrapper {
+        return NavigationApiWrapper(
+            searchFeatureApi = searchFeatureApi,
+            profileFeatureApi = profileFeatureApi,
+            settingsFeatureApi = settingsFeatureApi
+
+        )
+    }
 }
+
+data class NavigationApiWrapper(
+    val searchFeatureApi: SearchFeatureApi,
+    val profileFeatureApi: ProfileFeatureNavigationApi,
+    val settingsFeatureApi: SettingsFeatureNavigationApi
+)

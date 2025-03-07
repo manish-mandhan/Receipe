@@ -10,52 +10,47 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.navigation.NavController
 import androidx.compose.material3.Icon
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.toRoute
 import com.manish.mandhan.common.navigation.Navigation
 
 @Composable
 fun MyBottomNavBar(modifier: Modifier = Modifier, navController: NavHostController) {
-    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
-
+//    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
     val items = listOf(
         BottomNavItem(
-            Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList,
-            Icons.Default.Search,
-            "Search"
+            bottomNavScreen = Navigation.BottomNavigation.SearchFeature.Root,
+            icon = Icons.Default.Search,
+            label = "Search"
         ),
         BottomNavItem(
-            Navigation.BottomNavigation.HomeNavigation.Profile,
-            Icons.Default.Person,
-            "Profile"
+            bottomNavScreen = Navigation.BottomNavigation.ProfileFeature.Root,
+            icon = Icons.Default.Person,
+            label = "Profile"
         ),
         BottomNavItem(
-            Navigation.BottomNavigation.HomeNavigation.Settings,
-            Icons.Default.Settings,
-            "Settings"
+            bottomNavScreen = Navigation.BottomNavigation.SettingFeature.Root,
+            icon = Icons.Default.Settings,
+            label = "Settings"
         )
     )
     BottomAppBar {
-
         items.forEach { item ->
             NavigationBarItem(
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(item.label) },
-                selected = currentRoute == item.bottomNavScreen.route,
+                selected = false,
                 onClick = {
-                    if (currentRoute != item.bottomNavScreen.route) {
-                        navController.navigate(item.bottomNavScreen) {
-                            popUpTo(Navigation.BottomNavigation.SearchFeatureNavigation.RecipeList) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
+                    navController.navigate(item.bottomNavScreen) {
+                        popUpTo(Navigation.BottomNavigation.SearchFeature.RecipeList) {
+                            saveState = true
                         }
+                        launchSingleTop = true
+                        restoreState = true
                     }
+
                 }
             )
         }
