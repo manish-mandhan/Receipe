@@ -1,5 +1,6 @@
 package com.manish.mandhan.feature.profile.navigation
 
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
@@ -11,20 +12,22 @@ import javax.inject.Inject
 interface ProfileFeatureNavigationApi {
     fun registerGraph(
         navHostController: NavHostController,
-        navGraphBuilder: NavGraphBuilder
+        navGraphBuilder: NavGraphBuilder,
+        modifier: Modifier
     )
 }
 
 class ProfileFeatureNavigationApiImpl : ProfileFeatureNavigationApi {
     override fun registerGraph(
         navHostController: NavHostController,
-        navGraphBuilder: NavGraphBuilder
+        navGraphBuilder: NavGraphBuilder,
+        modifier:Modifier
     ) {
         navGraphBuilder.navigation<Navigation.BottomNavigation.ProfileFeature.Root>(
             startDestination = Navigation.BottomNavigation.ProfileFeature.Profile
         ) {
             composable<Navigation.BottomNavigation.ProfileFeature.Profile> {
-                ProfileScreen()
+                ProfileScreen(modifier = modifier)
             }
         }
     }

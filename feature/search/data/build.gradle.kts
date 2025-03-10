@@ -62,9 +62,15 @@ dependencies {
     implementation(libs.androidx.runtime)
     implementation(platform(libs.androidx.compose.bom))
 
+    // testing
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.kotlinx.coroutines.test)
+
+
 
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
+    testImplementation(libs.junit)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

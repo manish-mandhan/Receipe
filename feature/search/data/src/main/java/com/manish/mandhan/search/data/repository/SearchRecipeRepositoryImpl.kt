@@ -15,15 +15,14 @@ import java.net.UnknownHostException
 import java.util.Locale
 
 class SearchRecipeRepositoryImpl(private val api: SearchRecipeApi, private val dao: RecipeDao) :
+
     SearchRecipeRepository {
-
-
-    val TAG = "DATA LOG"
-    override suspend fun getRecipeByName(str: String): Result<List<DomainRecipeModel>> {
+        override suspend fun getRecipeByName(str: String): Result<List<DomainRecipeModel>> {
         return try {
 
             api.getProductByName(str).meals?.let { recipeDto ->
                 recipeDto.forEach {
+
                     it.strMeal?.let { strMealNonNull ->
                         dao.insertRecipe(
                             it.toOfflineModel(
@@ -48,7 +47,7 @@ class SearchRecipeRepositoryImpl(private val api: SearchRecipeApi, private val d
 
                 } ?: Result.Error(message = "No Result Found")
             }
-        } catch (e: UnknownHostException) {
+        } catch (e: Exception) {
             // same logic goes here but we are also addressing if there is no internet then also it should fetch data from room
 
             dao.getRecipesBySearch(str.lowercase(Locale.getDefault()))?.takeIf { it.isNotEmpty() }?.let { offlineDtoList ->
@@ -60,6 +59,5 @@ class SearchRecipeRepositoryImpl(private val api: SearchRecipeApi, private val d
                 Result.Success(onlineDtoList.toDomainModel())
             } ?: Result.Error(message = "No Network")
         }
-
     }
 }

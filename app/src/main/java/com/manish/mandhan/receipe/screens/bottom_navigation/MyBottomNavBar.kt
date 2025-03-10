@@ -1,5 +1,6 @@
 package com.manish.mandhan.receipe.screens.bottom_navigation
 
+import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
@@ -11,37 +12,47 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.NavigationBarItemColors
+import androidx.compose.material3.NavigationBarItemDefaults
+import androidx.compose.ui.graphics.Color
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.manish.mandhan.common.navigation.Navigation
+import kotlin.math.log
 
 @Composable
 fun MyBottomNavBar(modifier: Modifier = Modifier, navController: NavHostController) {
-//    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
     val items = listOf(
         BottomNavItem(
-            bottomNavScreen = Navigation.BottomNavigation.SearchFeature.Root,
+            bottomNavScreen = Navigation.BottomNavigation.SearchFeature.RecipeList,
             icon = Icons.Default.Search,
             label = "Search"
         ),
         BottomNavItem(
-            bottomNavScreen = Navigation.BottomNavigation.ProfileFeature.Root,
+            bottomNavScreen = Navigation.BottomNavigation.ProfileFeature.Profile,
             icon = Icons.Default.Person,
             label = "Profile"
         ),
         BottomNavItem(
-            bottomNavScreen = Navigation.BottomNavigation.SettingFeature.Root,
+            bottomNavScreen = Navigation.BottomNavigation.SettingFeature.Settings,
             icon = Icons.Default.Settings,
             label = "Settings"
         )
     )
-    BottomAppBar {
+    BottomAppBar(
+        containerColor = MaterialTheme.colorScheme.onPrimary,
+        contentColor = Color.DarkGray
+    ) {
         items.forEach { item ->
             NavigationBarItem(
+                colors = NavigationBarItemDefaults.colors(indicatorColor = MaterialTheme.colorScheme.primary),
                 icon = { Icon(item.icon, contentDescription = item.label) },
                 label = { Text(item.label) },
-                selected = false,
+                selected = currentDestination?.route == item.bottomNavScreen::class.qualifiedName,
                 onClick = {
                     navController.navigate(item.bottomNavScreen) {
                         popUpTo(Navigation.BottomNavigation.SearchFeature.RecipeList) {
@@ -53,6 +64,7 @@ fun MyBottomNavBar(modifier: Modifier = Modifier, navController: NavHostControll
 
                 }
             )
+
         }
 
     }

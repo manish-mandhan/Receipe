@@ -25,6 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
@@ -32,6 +33,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.manish.mandhan.presentation.R
 import com.manish.mandhan.presentation.screens.theme.onWhite
 import com.manish.mandhan.search.domain.model.DomainRecipeModel
 import kotlin.math.roundToInt
@@ -104,6 +106,7 @@ fun RecipeItem(
             Column(modifier = Modifier.fillMaxWidth(.70f)) {
 
                 Text(
+                    fontFamily = FontFamily(Font(R.font.montserrat_bold)),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                     text = data.strMeal,
@@ -114,6 +117,7 @@ fun RecipeItem(
                     fontSize = 18.sp
                 )
                 Text(
+                    fontFamily = FontFamily(Font(R.font.montserrat_medium)),
                     modifier = Modifier
                         .padding(top = 12.dp)
                         .padding(horizontal = 12.dp),
@@ -127,6 +131,7 @@ fun RecipeItem(
             }
             Spacer(modifier = Modifier.weight(1f))
             Text(
+                fontFamily = FontFamily(Font(R.font.montserrat_extra_bold)),
                 text = data.strCategory,
                 modifier = Modifier.padding(end = 14.dp, top = 14.dp),
                 fontWeight = FontWeight.Bold,

@@ -19,7 +19,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
-    buildFeatures{
+    buildFeatures {
         compose = true
     }
 
@@ -42,6 +42,8 @@ android {
 }
 
 dependencies {
+
+    implementation(libs.androidx.ui.tooling.preview)
 
     // hilt
     implementation(libs.google.dragger.hilt)

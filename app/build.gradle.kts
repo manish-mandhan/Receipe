@@ -9,6 +9,7 @@ plugins {
 
     id("com.google.dagger.hilt.android")
     id("com.google.devtools.ksp")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -66,9 +67,13 @@ dependencies {
 
     implementation(project(":common"))
 
+    // onesignal sdk
+    implementation(libs.onesignal)
+
 
     //room support
     implementation(libs.androidx.room.runtime)
+    implementation(libs.firebase.messaging)
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.ktx)
 
