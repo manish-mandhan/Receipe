@@ -23,8 +23,7 @@
 
 ## 📸 Screenshots  
 <p align="center">
-    <img src="your-image-url-1" alt="Screenshot 1" width="300">
-    <img src="your-image-url-2" alt="Screenshot 2" width="300">
+    <img src="https://github.com/manish-mandhan/Receipe/blob/main/porfolio_image.png" alt="Screenshot 1" width="300">
 </p>
 
 ## 🚀 Getting Started  
