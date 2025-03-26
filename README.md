@@ -26,9 +26,3 @@
     <img src="https://github.com/manish-mandhan/Receipe/blob/main/porfolio_image.png" alt="Screenshot 1" width="300">
 </p>
 
-## 🚀 Getting Started  
-
-**Clone the repository:**  
-```sh
-git clone https://github.com/your-repo/recipe-note.git
-
