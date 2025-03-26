@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "621219991471",
+    "project_id": "receipe-718cc",
+    "storage_bucket": "receipe-718cc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:621219991471:android:435d95527b71ed92a0695a",
+        "android_client_info": {
+          "package_name": "com.manish.mandhan.receipe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc0lnChyhIw_0hfiLdVfteHoI2dLVAVao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
